@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Cahaya Lintang Abadi - Mitra dalam Keunggulan</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0B0B;
+            color: #F8F8F8;
+        }
+        .font-display {
+            font-family: 'Syne', sans-serif;
+        }
+        /* Grid Teknikal & Overlay Blueprint */
+        .industrial-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+        .blueprint-line {
+            background: linear-gradient(90deg, transparent, rgba(183, 28, 28, 0.4) 50%, transparent);
+            height: 1px;
+            width: 100%;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0B0B0B; }
+        ::-webkit-scrollbar-thumb { background: #7F1D1D; }
+        ::-webkit-scrollbar-thumb:hover { background: #B71C1C; }
+        
+        /* Smooth Fade In Common Animation */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden industrial-grid" x-data="{ mobileMenu: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20) ? true : false">
+
+    <nav :class="scrolled ? 'bg(#0B0B0B)/80 backdrop-blur-md border-b border-white/10 h-[80px]' : 'bg-transparent border-b border-white/5 h-[90px]'" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 flex items-center">
+        <div class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-1.5 font-display text-xl font-black tracking-tighter text-[#F8F8F8]">
+                <span class="bg-[#B71C1C] text-black px-2 py-0.5 rounded-sm">C</span>
+                <span class="bg-[#7F1D1D] text-white px-2 py-0.5 rounded-sm -ml-1">L</span>
+                <span class="tracking-widest ml-1 text-sm font-light text-[#BDBDBD]">CHALINA</span>
+            </a>
+
+            <div class="hidden lg:flex items-center gap-8 text-xs font-semibold uppercase tracking-[0.15em] text-[#BDBDBD]">
+                <a href="#" class="text-[#F8F8F8] border-b-2 border-[#B71C1C] pb-1 transition-all">Beranda</a>
+                <a href="#about" class="hover:text-[#F8F8F8] hover:border-b-2 hover:border-[#B71C1C] pb-1 transition-all">Tentang</a>
+                <a href="#vision" class="hover:text-[#F8F8F8] hover:border-b-2 hover:border-[#B71C1C] pb-1 transition-all">Visi & Misi</a>
+                <a href="#services" class="hover:text-[#F8F8F8] hover:border-b-2 hover:border-[#B71C1C] pb-1 transition-all">Layanan</a>
+                <a href="#gallery" class="hover:text-[#F8F8F8] hover:border-b-2 hover:border-[#B71C1C] pb-1 transition-all">Galeri</a>
+                <a href="#experience" class="hover:text-[#F8F8F8] hover:border-b-2 hover:border-[#B71C1C] pb-1 transition-all">Pengalaman</a>
+                <a href="#why-us" class="hover:text-[#F8F8F8] hover:border-b-2 hover:border-[#B71C1C] pb-1 transition-all">Keunggulan</a>
+                <a href="#contact" class="hover:text-[#F8F8F8] hover:border-b-2 hover:border-[#B71C1C] pb-1 transition-all">Kontak</a>
+            </div>
+
+            <div class="hidden sm:block">
+                <a href="#contact" class="bg-transparent border border-[#B71C1C] text-[#F8F8F8] text-xs uppercase tracking-widest font-bold px-5 py-3 hover:bg-[#B71C1C] transition-all duration-300">Hubungi Kami</a>
+            </div>
+
+            <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-[#F8F8F8] focus:outline-none" aria-label="Toggle Menu">
+                <i :class="mobileMenu ? 'fa-solid fa-xmark text-xl' : 'fa-solid fa-bars text-xl'"></i>
+            </button>
+        </div>
+
+        <div x-show="mobileMenu" x-transition.opacity class="fixed inset-0 top-[80px] bg(#0B0B0B)/95 backdrop-blur-lg z-40 lg:hidden flex flex-col p-6 space-y-4 border-t border-white/5 text-sm uppercase font-semibold tracking-wider">
+            <a @click="mobileMenu = false" href="#" class="py-2 border-b border-white/5 text-white">Beranda</a>
+            <a @click="mobileMenu = false" href="#about" class="py-2 border-b border-white/5 text-[#BDBDBD]">Tentang</a>
+            <a @click="mobileMenu = false" href="#vision" class="py-2 border-b border-white/5 text-[#BDBDBD]">Visi & Misi</a>
+            <a @click="mobileMenu = false" href="#services" class="py-2 border-b border-white/5 text-[#BDBDBD]">Produk & Layanan</a>
+            <a @click="mobileMenu = false" href="#gallery" class="py-2 border-b border-white/5 text-[#BDBDBD]">Galeri</a>
+            <a @click="mobileMenu = false" href="#experience" class="py-2 border-b border-white/5 text-[#BDBDBD]">Pengalaman</a>
+            <a @click="mobileMenu = false" href="#contact" class="py-2 text-[#BDBDBD]">Kontak</a>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex flex-col justify-between bg-cover bg-center overflow-hidden pt-24" style="background-image: linear-gradient(180deg, rgba(11,11,11,0.9) 0%, rgba(11,11,11,0.7) 50%, rgba(11,11,11,0.95) 100%), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920'); background-attachment: fixed;">
+        <div class="absolute inset-0 opacity-10 bg-gradient-to-tr from-[#B71C1C] via-transparent to-[#7F1D1D] pointer-events-none mix-blend-color-dodge"></div>
+        
+        <div class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-auto py-16 relative z-10">
+            <div class="lg:col-span-7 space-y-6 animate-fade-up">
+                <div class="inline-flex items-center gap-2 border-l-2 border-[#B71C1C] pl-3">
+                    <span class="text-xs uppercase font-mono tracking-[0.25em] text-[#BDBDBD]">Perusahaan Tepercaya Pemeliharaan Infrastruktur</span>
+                </div>
+                <h1 class="font-display text-5xl md:text-7xl font-extrabold leading-[105%] text-[#F8F8F8] tracking-tight">
+                    Partner in<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] to-[#7F1D1D]">Excellence.</span>
+                </h1>
+                <p class="text-sm md:text-base font-normal text-[#BDBDBD] max-w-xl leading-relaxed">
+                    Layanan berskala nasional dan profesional di bidang konstruksi, pemeliharaan jalan tol, pemeliharaan infrastruktur, jasa kebersihan, dan penyediaan tenaga kerja handal.
+                </p>
+                <div class="pt-4 flex flex-wrap gap-4">
+                    <a href="#contact" class="bg-[#B71C1C] text-[#F8F8F8] font-bold text-xs uppercase tracking-widest px-8 py-4 hover:bg-[#7F1D1D] transition-all duration-300 shadow-lg shadow-[#B71C1C]/20">Hubungi Kami</a>
+                    <a href="#services" class="border border-[#BDBDBD]/30 text-[#F8F8F8] font-bold text-xs uppercase tracking-widest px-8 py-4 hover:bg-white/5 transition-all">Layanan Kami</a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 flex flex-col gap-4 lg:pl-10">
+                <div class="bg(#181818)/40 backdrop-blur-md border-l-4 border-[#B71C1C] border-y border-r border-white/5 p-6 flex items-center justify-between hover:translate-x-2 transition-transform duration-300">
+                    <div>
+                        <span class="block font-display text-4xl font-black text-[#F8F8F8]">2021</span>
+                        <span class="text-xs uppercase tracking-widest text-[#BDBDBD] font-mono">Tahun Berdiri</span>
+                    </div>
+                    <i class="fa-solid fa-building text-3xl text-white/10"></i>
+                </div>
+                <div class="bg(#181818)/40 backdrop-blur-md border-l-4 border-[#7F1D1D] border-y border-r border-white/5 p-6 flex items-center justify-between ml-6 hover:translate-x-2 transition-transform duration-300">
+                    <div>
+                        <span class="block font-display text-4xl font-black text-[#F8F8F8]">9+</span>
+                        <span class="text-xs uppercase tracking-widest text-[#BDBDBD] font-mono">Layanan Utama</span>
+                    </div>
+                    <i class="fa-solid fa-screwdriver-wrench text-3xl text-white/10"></i>
+                </div>
+                <div class="bg(#181818)/40 backdrop-blur-md border-l-4 border-[#B71C1C] border-y border-r border-white/5 p-6 flex items-center justify-between hover:translate-x-2 transition-transform duration-300">
+                    <div>
+                        <span class="block font-display text-4xl font-black text-[#F8F8F8]">Nasional</span>
+                        <span class="text-xs uppercase tracking-widest text-[#BDBDBD] font-mono">Skala Infrastruktur</span>
+                    </div>
+                    <i class="fa-solid fa-map-location-dot text-3xl text-white/10"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex justify-center pb-8 z-10">
+            <a href="#about" class="text-xs font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors flex flex-col items-center gap-2">
+                <span>Scroll Down</span>
+                <i class="fa-solid fa-arrow-down animate-bounce"></i>
+            </a>
+        </div>
+        <div class="blueprint-line"></div>
+    </section>
+
+    <section id="about" class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-[120px] grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div class="lg:col-span-5 relative">
+            <div class="absolute -bottom-4 -left-4 w-32 h-32 border-b-2 border-l-2 border-[#B71C1C] z-0"></div>
+            <div class="absolute -top-4 -right-4 w-32 h-32 border-t-2 border-r-2 border-[#7F1D1D] z-0"></div>
+            <div class="relative z-10 overflow-hidden border border-white/10 shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800" alt="Industrial Construction Work site" class="w-full h-[500px] object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-700">
+            </div>
+        </div>
+        
+        <div class="lg:col-span-7 space-y-6">
+            <span class="font-mono text-xs text-[#B71C1C] tracking-[0.3em] uppercase block">01 // TENTANG PERUSAHAAN</span>
+            <h2 class="font-display text-3xl md:text-5xl font-extrabold text-[#F8F8F8] tracking-tight">Dirancang untuk Ketangguhan</h2>
+            <p class="text-sm md:text-base font-light leading-relaxed text-[#BDBDBD]">
+                Didirikan pada tahun 2021, PT Cahaya Lintang Abadi bergerak di bidang konstruksi dan penyediaan tenaga kerja dengan komitmen kuat untuk memberikan layanan yang unggul. Mengusung slogan <strong class="text-[#F8F8F8] font-medium">"Partner In Excellence,"</strong> kami berorientasi pada hasil dan efisiensi anggaran untuk menghadirkan solusi terbaik bagi setiap kebutuhan pelanggan.
+            </p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                <div class="bg(#181818)/30 border border-white/5 p-5 backdrop-blur-sm flex items-start gap-4">
+                    <span class="text-xs font-mono text-[#B71C1C] mt-1">01.</span>
+                    <div>
+                        <h4 class="text-sm font-bold text-[#F8F8F8] uppercase tracking-wider mb-1">Keunggulan Operasional</h4>
+                        <p class="text-xs text-[#BDBDBD] font-light">Konsistensi ketat terhadap target waktu penyelesaian proyek infrastruktur.</p>
+                    </div>
+                </div>
+                <div class="bg(#181818)/30 border border-white/5 p-5 backdrop-blur-sm flex items-start gap-4">
+                    <span class="text-xs font-mono text-[#B71C1C] mt-1">02.</span>
+                    <div>
+                        <h4 class="text-sm font-bold text-[#F8F8F8] uppercase tracking-wider mb-1">Tim Profesional</h4>
+                        <p class="text-xs text-[#BDBDBD] font-light">Profil kompetensi tenaga kerja tinggi tersertifikasi di lapangan ekstrim.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="bg-[#111111] py-[120px] relative border-y border-white/5">
+        <div class="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="text-center space-y-3 mb-16">
+                <span class="font-mono text-xs text-[#B71C1C] tracking-[0.3em] uppercase block">02 // HALUAN UTAMA</span>
+                <h2 class="font-display text-3xl md:text-5xl font-extrabold text-[#F8F8F8]">Visi & Misi Perusahaan</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg(#181818)/40 border border-white/5 p-8 lg:p-12 relative overflow-hidden group hover:border-[#B71C1C]/50 transition-colors">
+                    <div class="absolute -right-8 -bottom-8 text-white/5 text-9xl font-display font-bold">VISI</div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-[#B71C1C]/10 border border-[#B71C1C] flex items-center justify-center text-[#B71C1C]">
+                            <i class="fa-solid fa-eye text-xl"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wider">Visi Kami</h3>
+                    </div>
+                    <p class="text-sm md:text-base text-[#BDBDBD] font-light leading-relaxed">
+                        Menjadi perusahaan penyedia jasa konstruksi, pemeliharaan jalan tol, dan penyedia tenaga kerja nasional utama yang diakui atas keunggulan kualitas operasional, integritas, serta efisiensi anggaran di setiap lini proyek.
+                    </p>
+                </div>
+
+                <div class="bg(#181818)/40 border border-white/5 p-8 lg:p-12 relative overflow-hidden group hover:border-[#7F1D1D]/50 transition-colors">
+                    <div class="absolute -right-8 -bottom-8 text-white/5 text-9xl font-display font-bold">MISI</div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-[#7F1D1D]/10 border border-[#7F1D1D] flex items-center justify-center text-[#7F1D1D]">
+                            <i class="fa-solid fa-bullseye text-xl"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wider">Misi Kami</h3>
+                    </div>
+                    <ul class="space-y-4 text-xs md:text-sm text-[#BDBDBD] font-light">
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#B71C1C] font-mono mt-0.5">01.</span>
+                            <span>Menyelenggarakan tata kelola pemeliharaan jalan tol dan infrastruktur dengan standar regulasi keselamatan terbaik.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#B71C1C] font-mono mt-0.5">02.</span>
+                            <span>Menyediakan pengelolaan sumber daya manusia (workforce supply) yang terampil, tangguh, dan bersertifikasi industri.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#B71C1C] font-mono mt-0.5">03.</span>
+                            <span>Membangun kemitraan strategis jangka panjang bersama entitas BUMN dan Swasta berlandaskan azas keterbukaan dan kepuasan pelanggan.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-[120px] w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div class="space-y-3">
+                <span class="font-mono text-xs text-[#B71C1C] tracking-[0.3em] uppercase block">03 // MATRIKS KAPABILITAS</span>
+                <h2 class="font-display text-3xl md:text-5xl font-extrabold text-[#F8F8F8] tracking-tight">Layanan Infrastruktur</h2>
+            </div>
+            <p class="text-xs text-[#BDBDBD] max-w-sm font-light leading-relaxed border-l border-[#7F1D1D] pl-4">
+                Sembilan pilar utama layanan konstruksi dan pemeliharaan koridor transit yang dioperasikan secara presisi dan sistematis.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="group bg-[#111111] border border-white/5 overflow-hidden transition-all duration-300 hover:border-[#B71C1C] flex flex-col justify-between">
+                <div class="overflow-hidden h-[220px] relative">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1515162305285-0293e4767cc2?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" alt="Toll Road Maintenance">
+                    <div class="absolute top-4 right-4 bg-[#0B0B0B]/90 text-[#B71C1C] p-2 border border-white/10">
+                        <i class="fa-solid fa-road"></i>
+                    </div>
+                </div>
+                <div class="p-6 space-y-2 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-[#F8F8F8] uppercase mb-1">Toll Road Maintenance</h3>
+                        <p class="text-xs font-light text-[#BDBDBD] leading-relaxed">Perbaikan struktural rutin, pemeliharaan perkerasan jalan tol, dan *patching* aspal pada jalur koridor utama logistik lintas provinsi.</p>
+                    </div>
+                    <div class="pt-4 flex justify-end text-sm text-[#B71C1C] group-hover:text-white font-mono font-bold">→</div>
+                </div>
+            </div>
+
+            <div class="group bg-[#111111] border border-white/5 overflow-hidden transition-all duration-300 hover:border-[#B71C1C] flex flex-col justify-between">
+                <div class="overflow-hidden h-[220px] relative">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" alt="Expansion Joint Works">
+                    <div class="absolute top-4 right-4 bg-[#0B0B0B]/90 text-[#B71C1C] p-2 border border-white/10">
+                        <i class="fa-solid fa-bridge-water"></i>
+                    </div>
+                </div>
+                <div class="p-6 space-y-2 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-[#F8F8F8] uppercase mb-1">Expansion Joint Works</h3>
+                        <p class="text-xs font-light text-[#BDBDBD] leading-relaxed">Pekerjaan mekanis rehabilitasi, pemasangan, dan penyelarasan struktur sambungan siar muai pada jembatan dan jalan layang.</p>
+                    </div>
+                    <div class="pt-4 flex justify-end text-sm text-[#B71C1C] group-hover:text-white font-mono font-bold">→</div>
+                </div>
+            </div>
+
+            <div class="group bg-[#111111] border border-white/5 overflow-hidden transition-all duration-300 hover:border-[#B71C1C] flex flex-col justify-between">
+                <div class="overflow-hidden h-[220px] relative">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" alt="Traffic Sign Cleaning">
+                    <div class="absolute top-4 right-4 bg-[#0B0B0B]/90 text-[#B71C1C] p-2 border border-white/10">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    </div>
+                </div>
+                <div class="p-6 space-y-2 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-[#F8F8F8] uppercase mb-1">Traffic Sign Cleaning</h3>
+                        <p class="text-xs font-light text-[#BDBDBD] leading-relaxed">Pembersihan berkala rambu lalu lintas, reflektor pembatas jalan, untuk menjamin visibilitas aman bagi pengendara.</p>
+                    </div>
+                    <div class="pt-4 flex justify-end text-sm text-[#B71C1C] group-hover:text-white font-mono font-bold">→</div>
+                </div>
+            </div>
+
+            <div class="group bg-[#111111] border border-white/5 overflow-hidden transition-all duration-300 hover:border-[#B71C1C] flex flex-col justify-between">
+                <div class="overflow-hidden h-[220px] relative">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1605281317010-fe5ffe798156?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" alt="Road Cleaning">
+                    <div class="absolute top-4 right-4 bg-[#0B0B0B]/90 text-[#B71C1C] p-2 border border-white/10">
+                        <i class="fa-solid fa-broom"></i>
+                    </div>
+                </div>
+                <div class="p-6 space-y-2 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-[#F8F8F8] uppercase mb-1">Road Cleaning</h3>
+                        <p class="text-xs font-light text-[#BDBDBD] leading-relaxed">Pembersihan area perkerasan jalan tol dari sisa puing, debu makadam, vegetasi liar merayap demi kelancaran laju kendaraan.</p>
+                    </div>
+                    <div class="pt-4 flex justify-end text-sm text-[#B71C1C] group-hover:text-white font-mono font-bold">→</div>
+                </div>
+            </div>
+
+            <div class="group bg-[#111111] border border-white/5 overflow-hidden transition-all duration-300 hover:border-[#B71C1C] flex flex-col justify-between">
+                <div class="overflow-hidden h-[220px] relative">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" alt="Garden Maintenance">
+                    <div class="absolute top-4 right-4 bg-[#0B0B0B]/90 text-[#B71C1C] p-2 border border-white/10">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                </div>
+                <div class="p-6 space-y-2 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-[#F8F8F8] uppercase mb-1">Garden Maintenance</h3>
+                        <p class="text-xs font-light text-[#BDBDBD] leading-relaxed">Penataan arsitektur lanskap hijau, perawatan tanaman media jalan, pemotongan rumput di sepanjang koridor rumija jalan tol.</p>
+                    </div>
+                    <div class="pt-4 flex justify-end text-sm text-[#B71C1C] group-hover:text-white font-mono font-bold">→</div>
+                </div>
+            </div>
+
+            <div class="group bg-[#111111] border border-white/5 overflow-hidden transition-all duration-300 hover:border-[#B71C1C] flex flex-col justify-between">
+                <div class="overflow-hidden h-[220px] relative">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1584467541268-b040f83be3fd?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" alt="Drainage System Cleaning">
+                    <div class="absolute top-4 right-4 bg-[#0B0B0B]/90 text-[#B71C1C] p-2 border border-white/10">
+                        <i class="fa-solid fa-faucet-drip"></i>
+                    </div>
+                </div>
+                <div class="p-6 space-y-2 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-[#F8F8F8] uppercase mb-1">Drainage System Cleaning</h3>
+                        <p class="text-xs font-light text-[#BDBDBD] leading-relaxed">Normalisasi, pembersihan sedimen lumpur, dan pembersihan sampah pada saluran air semen (*u-ditch*) penunjang badan jalan.</p>
+                    </div>
+                    <div class="pt-4 flex justify-end text-sm text-[#B71C1C] group-hover:text-white font-mono font-bold">→</div>
+                </div>
+            </div>
+
+            <div class="group bg-[#111111] border border-white/5 overflow-hidden transition-all duration-300 hover:border-[#B71C1C] flex flex-col justify-between">
+                <div class="overflow-hidden h-[220px] relative">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" alt="Concrete Barrier Cleaning">
+                    <div class="absolute top-4 right-4 bg-[#0B0B0B]/90 text-[#B71C1C] p-2 border border-white/10">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </div>
+                </div>
+                <div class="p-6 space-y-2 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-[#F8F8F8] uppercase mb-1">Concrete Barrier Cleaning</h3>
+                        <p class="text-xs font-light text-[#BDBDBD] leading-relaxed">Pembersihan mekanis beton pembatas jalur (*movable concrete barrier*) guna menjaga visibilitas marka regulasi tetap bersih.</p>
+                    </div>
+                    <div class="pt-4 flex justify-end text-sm text-[#B71C1C] group-hover:text-white font-mono font-bold">→</div>
+                </div>
+            </div>
+
+            <div class="group bg-[#111111] border border-white/5 overflow-hidden transition-all duration-300 hover:border-[#B71C1C] flex flex-col justify-between">
+                <div class="overflow-hidden h-[220px] relative">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" alt="Bronjong Works">
+                    <div class="absolute top-4 right-4 bg-[#0B0B0B]/90 text-[#B71C1C] p-2 border border-white/10">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
+                </div>
+                <div class="p-6 space-y-2 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-[#F8F8F8] uppercase mb-1">Bronjong Works</h3>
+                        <p class="text-xs font-light text-[#BDBDBD] leading-relaxed">Pemasangan anyaman kawat baja berlapis seng dengan isi batu (*gabion*) untuk penahan tebing rawan longsor di tepi jalur arteri.</p>
+                    </div>
+                    <div class="pt-4 flex justify-end text-sm text-[#B71C1C] group-hover:text-white font-mono font-bold">→</div>
+                </div>
+            </div>
+
+            <div class="group bg-[#111111] border border-white/5 overflow-hidden transition-all duration-300 hover:border-[#B71C1C] flex flex-col justify-between">
+                <div class="overflow-hidden h-[220px] relative">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" alt="Workforce Supply">
+                    <div class="absolute top-4 right-4 bg-[#0B0B0B]/90 text-[#B71C1C] p-2 border border-white/10">
+                        <i class="fa-solid fa-users-gear"></i>
+                    </div>
+                </div>
+                <div class="p-6 space-y-2 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold tracking-wider text-[#F8F8F8] uppercase mb-1">Penyedia Tenaga Kerja</h3>
+                        <p class="text-xs font-light text-[#BDBDBD] leading-relaxed">Penyediaan dan manajemen terintegrasi tim operasional lapangan tangguh bersertifikasi khusus untuk industri konstruksi berat.</p>
+                    </div>
+                    <div class="pt-4 flex justify-end text-sm text-[#B71C1C] group-hover:text-white font-mono font-bold">→</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="gallery" class="bg-[#111111] py-[120px] border-y border-white/5">
+        <div class="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="space-y-3 mb-16">
+                <span class="font-mono text-xs text-[#B71C1C] tracking-[0.3em] uppercase block">04 // REK REKAM VISUAL</span>
+                <h2 class="font-display text-3xl md:text-5xl font-extrabold text-[#F8F8F8] tracking-tight">Galeri Proyek Aktual</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <div class="relative overflow-hidden group border border-white/5 h-[350px]">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500" alt="Proyek Manado">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-[10px] font-mono text-[#B71C1C] uppercase tracking-widest mb-1">Pemeliharaan Jalan Arteri</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-white">Manado–Bitung Infrastructure</h4>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden group border border-white/5 h-[280px] sm:h-[350px]">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1515162305285-0293e4767cc2?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500" alt="Proyek Bekasi">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-[10px] font-mono text-[#B71C1C] uppercase tracking-widest mb-1">Cleansing Koridor</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-white">Cibitung–Cilincing Structural</h4>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden group border border-white/5 h-[350px]">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500" alt="Manpower Supply Assets">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-[10px] font-mono text-[#B71C1C] uppercase tracking-widest mb-1">Penyediaan Tenaga Kerja</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-white">Pengadaan Personil Tol</h4>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden group border border-white/5 h-[350px]">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1584467541268-b040f83be3fd?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500" alt="Drainage Operations Site">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-[10px] font-mono text-[#B71C1C] uppercase tracking-widest mb-1">Pekerjaan Mekanikal</span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-white">Normalisasi U-Ditch Sistem</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-[120px] space-y-16">
+        <div class="space-y-3">
+            <span class="font-mono text-xs text-[#B71C1C] tracking-[0.3em] uppercase block">05 // REAL ASSET TRACK</span>
+            <h2 class="font-display text-3xl md:text-5xl font-extrabold text-[#F8F8F8] tracking-tight">Pengalaman Proyek Historis</h2>
+        </div>
+
+        <div class="hidden lg:block relative w-full h-[2px] bg-white/10 my-24 flex justify-between items-center">
+            
+            <div class="absolute left-0 -top-4 w-[260px] flex flex-col pt-8">
+                <div class="w-3 h-3 bg-[#B71C1C] absolute top-[11px] left-0"></div>
+                <span class="font-display font-black text-3xl text-white/20 mb-2">2022</span>
+                <div class="bg-[#111111] border border-white/5 p-4 space-y-1">
+                    <span class="block text-xs font-bold uppercase tracking-wider text-[#F8F8F8]">Manado–Bitung</span>
+                    <p class="text-[11px] text-[#BDBDBD] font-light leading-relaxed">Eksekusi preservasi rutin ruang milik jalan tol (*rumija*) koridor utara.</p>
+                </div>
+            </div>
+
+            <div class="absolute left-[30%] -top-4 w-[260px] flex flex-col pt-8">
+                <div class="w-3 h-3 bg-[#7F1D1D] absolute top-[11px] left-0"></div>
+                <span class="font-display font-black text-3xl text-white/20 mb-2">2023</span>
+                <div class="bg-[#111111] border border-white/5 p-4 space-y-1">
+                    <span class="block text-xs font-bold uppercase tracking-wider text-[#F8F8F8]">Manado–Bitung II</span>
+                    <p class="text-[11px] text-[#BDBDBD] font-light leading-relaxed">Perluasan area kontrol pemeliharaan jalan tol skala regional.</p>
+                </div>
+            </div>
+
+            <div class="absolute left-[60%] -top-4 w-[260px] flex flex-col pt-8">
+                <div class="w-3 h-3 bg-[#B71C1C] absolute top-[11px] left-0"></div>
+                <span class="font-display font-black text-3xl text-white/20 mb-2">2024–2025</span>
+                <div class="bg-[#111111] border border-white/5 p-4 space-y-1">
+                    <span class="block text-xs font-bold uppercase tracking-wider text-[#F8F8F8]">Cibitung–Cilincing</span>
+                    <p class="text-[11px] text-[#BDBDBD] font-light leading-relaxed">Optimalisasi struktural drainase beton & pembatas jalan utama.</p>
+                </div>
+            </div>
+
+            <div class="absolute right-0 -top-4 w-[260px] flex flex-col pt-8">
+                <div class="w-3 h-3 bg-[#7F1D1D] absolute top-[11px] right-0 lg:left-0"></div>
+                <span class="font-display font-black text-3xl text-[#B71C1C] mb-2">2025–2028</span>
+                <div class="bg-[#111111] border border-[#B71C1C]/30 p-4 space-y-1">
+                    <span class="block text-xs font-bold uppercase tracking-wider text-[#B71C1C]">Pengadaan Personil</span>
+                    <p class="text-[11px] text-[#BDBDBD] font-light leading-relaxed">Model pendelegasian manpower terintegrasi jangka panjang aktivitas tol.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:hidden relative border-l border-white/10 ml-4 space-y-8 py-4">
+            
+            <div class="relative pl-6">
+                <div class="absolute w-3 h-3 bg-[#B71C1C] rounded-none -left-[6px] top-1.5"></div>
+                <span class="block font-display font-black text-xl text-white/50 mb-1">2022</span>
+                <div class="bg-[#111111] border border-white/5 p-4">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Manado–Bitung Project</h4>
+                    <p class="text-xs text-[#BDBDBD] font-light mt-1">Preservasi berkala ruang milik jalur tol arteri Sulawesi Utara.</p>
+                </div>
+            </div>
+
+            <div class="relative pl-6">
+                <div class="absolute w-3 h-3 bg-[#7F1D1D] rounded-none -left-[6px] top-1.5"></div>
+                <span class="block font-display font-black text-xl text-white/50 mb-1">2023</span>
+                <div class="bg-[#111111] border border-white/5 p-4">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Manado–Bitung Lanjutan</h4>
+                    <p class="text-xs text-[#BDBDBD] font-light mt-1">Skala pembersihan koridor logistik nasional komprehensif.</p>
+                </div>
+            </div>
+
+            <div class="relative pl-6">
+                <div class="absolute w-3 h-3 bg-[#B71C1C] rounded-none -left-[6px] top-1.5"></div>
+                <span class="block font-display font-black text-xl text-white/50 mb-1">2024–2025</span>
+                <div class="bg-[#111111] border border-white/5 p-4">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Cibitung–Cilincing Work</h4>
+                    <p class="text-xs text-[#BDBDBD] font-light mt-1">Sistem tata kelola kebersihan saluran beton struktural terintegrasi.</p>
+                </div>
+            </div>
+
+            <div class="relative pl-6">
+                <div class="absolute w-3 h-3 bg-[#B71C1C] rounded-none -left-[6px] top-1.5"></div>
+                <span class="block font-display font-black text-xl text-[#B71C1C] mb-1">2025–2028</span>
+                <div class="bg-[#111111] border border-[#B71C1C]/40 p-4">
+                    <h4 class="text-xs font-bold text-[#B71C1C] uppercase tracking-wider">Pengadaan Personil Aktivitas Jalan Tol</h4>
+                    <p class="text-xs text-[#BDBDBD] font-light mt-1">Kontrak masif penyuplaian manpower tersertifikasi penuh untuk operasional tol.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="why-us" class="bg-[#111111] py-[120px] border-y border-white/5">
+        <div class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 space-y-12">
+            <div class="max-w-xl">
+                <span class="font-mono text-xs text-[#B71C1C] tracking-[0.3em] uppercase block mb-3">06 // PARAMETER OPERASIONAL</span>
+                <h2 class="font-display text-3xl md:text-5xl font-extrabold text-[#F8F8F8] tracking-tight">Nilai Keunggulan Kami</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg(#181818)/40 border border-white/5 p-8 flex flex-col justify-between h-[200px] hover:border-[#B71C1C]/40 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <i class="fa-solid fa-user-shield text-2xl text-[#B71C1C]"></i>
+                        <span class="font-display font-bold text-xl text-white/5">PRO</span>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-[#F8F8F8] uppercase tracking-wider mb-1">Profesional</h3>
+                        <p class="text-xs text-[#BDBDBD] font-light leading-relaxed">Manajemen operasional berbasis SLA ketat sesuai standar keselamatan nasional.</p>
+                    </div>
+                </div>
+                <div class="bg(#181818)/40 border border-white/5 p-8 flex flex-col justify-between h-[200px] hover:border-[#B71C1C]/40 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <i class="fa-solid fa-clock text-2xl text-[#B71C1C]"></i>
+                        <span class="font-display font-bold text-xl text-white/5">TIME</span>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-[#F8F8F8] uppercase tracking-wider mb-1">Tepat Waktu</h3>
+                        <p class="text-xs text-[#BDBDBD] font-light leading-relaxed">Ketepatan tinggi dalam mengeksekusi proyek penanganan konstruksi koridor.</p>
+                    </div>
+                </div>
+                <div class="bg(#181818)/40 border border-white/5 p-8 flex flex-col justify-between h-[200px] hover:border-[#B71C1C]/40 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <i class="fa-solid fa-id-card-clip text-2xl text-[#B71C1C]"></i>
+                        <span class="font-display font-bold text-xl text-white/5">HR</span>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-[#F8F8F8] uppercase tracking-wider mb-1">SDM Berkualitas</h3>
+                        <p class="text-xs text-[#BDBDBD] font-light leading-relaxed">Penyaringan dan pembekalan sertifikasi teknis ketat bagi seluruh personal kerja.</p>
+                    </div>
+                </div>
+                <div class="bg(#181818)/40 border border-white/5 p-8 flex flex-col justify-between h-[200px] hover:border-[#B71C1C]/40 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <i class="fa-solid fa-helmet-safety text-2xl text-[#B71C1C]"></i>
+                        <span class="font-display font-bold text-xl text-white/5">EXP</span>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-[#F8F8F8] uppercase tracking-wider mb-1">Berpengalaman</h3>
+                        <p class="text-xs text-[#BDBDBD] font-light leading-relaxed">Rekam jejak terbukti menjaga ketahanan aset infrastruktur vital negara.</p>
+                    </div>
+                </div>
+                <div class="bg(#181818)/40 border border-white/5 p-8 flex flex-col justify-between h-[200px] hover:border-[#B71C1C]/40 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <i class="fa-solid fa-heart-circle-check text-2xl text-[#B71C1C]"></i>
+                        <span class="font-display font-bold text-xl text-white/5">CUST</span>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-[#F8F8F8] uppercase tracking-wider mb-1">Customer Oriented</h3>
+                        <p class="text-xs text-[#BDBDBD] font-light leading-relaxed">Fleksibilitas tinggi menyelaraskan kualitas output kerja dengan anggaran klien.</p>
+                    </div>
+                </div>
+                <div class="bg(#181818)/40 border border-white/5 p-8 flex flex-col justify-between h-[200px] hover:border-[#B71C1C]/40 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <i class="fa-solid fa-star text-2xl text-[#B71C1C]"></i>
+                        <span class="font-display font-bold text-xl text-white/5">EXEC</span>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-[#F8F8F8] uppercase tracking-wider mb-1">Operational Excellence</h3>
+                        <p class="text-xs text-[#BDBDBD] font-light leading-relaxed">Prinsip kerja tanpa cacat (*zero delay logistic*) pada jalur transit padat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-[120px] grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-7 space-y-8">
+            <div class="space-y-2">
+                <span class="font-mono text-xs text-[#B71C1C] tracking-[0.3em] uppercase block">07 // HUBUNGI KAMI</span>
+                <h2 class="font-display text-3xl md:text-5xl font-extrabold text-[#F8F8F8] tracking-tight">Koneksi Enterprise</h2>
+            </div>
+            
+            <form class="space-y-4" onsubmit="event.preventDefault();">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input type="text" placeholder="NAMA LENGKAP" class="w-full bg-[#111111] border border-white/10 p-4 text-xs font-mono uppercase text-white focus:outline-none focus:border-[#B71C1C]" required>
+                    <input type="email" placeholder="EMAIL PERUSAHAAN" class="w-full bg-[#111111] border border-white/10 p-4 text-xs font-mono uppercase text-white focus:outline-none focus:border-[#B71C1C]" required>
+                </div>
+                <input type="text" placeholder="SUBJEK" class="w-full bg-[#111111] border border-white/10 p-4 text-xs font-mono uppercase text-white focus:outline-none focus:border-[#B71C1C]" required>
+                <textarea rows="5" placeholder="PESAN ATAU SPESIFIKASI PROYEK" class="w-full bg-[#111111] border border-white/10 p-4 text-xs font-mono uppercase text-white focus:outline-none focus:border-[#B71C1C]" required></textarea>
+                <button type="submit" class="bg-[#B71C1C] text-white text-xs font-mono tracking-widest font-bold uppercase px-8 py-4 hover:bg-[#7F1D1D] transition-colors w-full sm:w-auto">KIRIM PESAN</button>
+            </form>
+        </div>
+
+        <div class="lg:col-span-5 space-y-8">
+            <div class="bg-[#111111] border border-white/5 p-6 space-y-4 font-mono text-xs text-[#BDBDBD]">
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-building text-[#B71C1C] mr-2"></i>Head Office</h4>
+                    <p>Mensana Tower LT 6 Unit K, Jatiasih, Kota Bekasi, Jawa Barat</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-network-wired text-[#7F1D1D] mr-2"></i>Branch Support Hubs</h4>
+                    <p>Operational support hubs located in Manado and Karanganyar</p>
+                </div>
+                <div class="border-t border-white/5 pt-4 space-y-2">
+                    <p><strong class="text-white">Enterprise Line:</strong> 0823 2081 3439</p>
+                    <p><strong class="text-white">Email Route:</strong> chalinalintangabadi@gmail.com</p>
+                </div>
+                
+                <div class="pt-2">
+                    <a href="https://wa.me/6282320813439" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[#25D366] text-black font-bold text-xs uppercase px-5 py-3 tracking-wider rounded-none font-sans hover:bg-[#20ba5a] transition-colors">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>Hubungi Via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <div class="h-[200px] bg-cover bg-center border border-white/5 relative grayscale" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=600');">
+                <div class="absolute inset-0 bg-black/70 flex items-center justify-center flex-col text-center p-4">
+                    <i class="fa-solid fa-location-dot text-[#B71C1C] text-2xl mb-2 animate-bounce"></i>
+                    <span class="text-[10px] font-mono tracking-widest text-white uppercase font-bold">Bekasi, West Java, Indonesia</span>
+                    <span class="text-[9px] font-mono text-white/40 mt-1 uppercase">Sistem Koordinat Geografis Terkunci</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/5 bg-[#060606] pt-20 pb-10 relative z-20">
+        <div class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-sm text-[#BDBDBD] pb-12">
+            
+            <div class="space-y-4">
+                <div class="flex items-center gap-1.5 font-display text-xl font-black tracking-tighter text-[#F8F8F8]">
+                    <span class="bg-[#B71C1C] text-black px-2 py-0.5 rounded-sm">C</span>
+                    <span class="bg-[#7F1D1D] text-white px-2 py-0.5 rounded-sm -ml-1">L</span>
+                    <span class="tracking-widest ml-1 text-sm font-light text-[#BDBDBD]">CHALINA</span>
+                </div>
+                <p class="text-xs font-mono tracking-wider text-white/30 uppercase">Partner In Excellence</p>
+                <div class="pt-2 flex gap-4 text-white/30 text-xs font-mono">
+                    <a href="#" class="hover:text-[#B71C1C]" aria-label="LinkedIn Account"><i class="fa-brands fa-linkedin-in text-base"></i></a>
+                    <a href="#" class="hover:text-[#B71C1C]" aria-label="X Twitter Account"><i class="fa-brands fa-x-twitter text-base"></i></a>
+                    <a href="#" class="hover:text-[#B71C1C]" aria-label="Youtube Account"><i class="fa-brands fa-youtube text-base"></i></a>
+                </div>
+            </div>
+            
+            <div class="space-y-3">
+                <span class="block font-mono text-xs uppercase text-white tracking-widest mb-2">Navigasi Cepat</span>
+                <a href="#" class="block text-xs hover:text-white transition-colors">Beranda</a>
+                <a href="#about" class="block text-xs hover:text-white transition-colors">Tentang Profil</a>
+                <a href="#vision" class="block text-xs hover:text-white transition-colors">Visi & Misi</a>
+                <a href="#services" class="block text-xs hover:text-white transition-colors">Core Capability Matrix</a>
+            </div>
+
+            <div class="space-y-2">
+                <span class="block font-mono text-xs uppercase text-white tracking-widest mb-2">Produk Layanan</span>
+                <span class="block text-xs text-white/50">Toll Road Care</span>
+                <span class="block text-xs text-white/50">Joint Works Construction</span>
+                <span class="block text-xs text-white/50">Drainage Management</span>
+                <span class="block text-xs text-white/50">Manpower supply</span>
+            </div>
+
+            <div class="space-y-3 font-mono text-xs">
+                <span class="block text-white tracking-widest font-sans uppercase font-bold">KANTOR UTAMA</span>
+                <p class="leading-relaxed text-white/60">Mensana Tower LT 6 Unit K, Jatiasih, Kota Bekasi, Jawa Barat</p>
+                <p class="text-white/40">Line: 0823 2081 3439</p>
+            </div>
+        </div>
+
+        <div class="w-full max-w-[1440px] mx-auto px-6 lg:px-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center text-[11px] text-white/30 gap-4 font-mono">
+            <span>&copy; 2026 PT Cahaya Lintang Abadi. Structural Engineering Frameworks Asset Group.</span>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white">Kebijakan Privasi</a>
+                <a href="#" class="hover:text-white">Kepatuhan Operasional</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
