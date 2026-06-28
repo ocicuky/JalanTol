@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Cahaya Lintang Abadi — Partner in Excellence</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --crimson: #B71C1C;
+            --crimson-dark: #7F1D1D;
+            --crimson-deep: #4A0E0E;
+            --near-black: #0A0A0A;
+            --surface: #111111;
+            --surface-2: #1A1A1A;
+            --border: rgba(255,255,255,0.06);
+            --border-red: rgba(183,28,28,0.3);
+            --text: #F0F0F0;
+            --muted: #888888;
+            --muted-light: #AAAAAA;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Barlow', 'Inter', sans-serif;
+            background-color: var(--near-black);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .font-display { font-family: 'Barlow Condensed', sans-serif; letter-spacing: -0.01em; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--near-black); }
+        ::-webkit-scrollbar-thumb { background: var(--crimson-dark); border-radius: 4px; }
+
+        /* GRID OVERLAY */
+        .grid-overlay {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image:
+                linear-gradient(rgba(183,28,28,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(183,28,28,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* NAV */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+        .nav-inner {
+            max-width: 1440px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 48px; height: 72px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(10,10,10,0.92);
+            backdrop-filter: blur(20px);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .nav-logo-mark {
+            width: 36px; height: 36px;
+            background: var(--crimson);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-logo-mark svg { width: 20px; height: 20px; }
+        .nav-wordmark { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.12em; color: var(--text); }
+        .nav-links { display: flex; align-items: center; gap: 36px; }
+        .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        .nav-cta {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--text); background: var(--crimson); border: none;
+            padding: 10px 24px; text-decoration: none;
+            transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--crimson-dark); }
+
+        /* ====== HERO ====== */
+        #hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex; flex-direction: column;
+            background: var(--near-black);
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0; z-index: 0;
+            background-image:
+                linear-gradient(to bottom, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.55) 50%, rgba(10,10,10,0.9) 100%),
+                url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1920');
+            background-size: cover; background-position: center;
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            max-width: 1440px; margin: 0 auto; width: 100%;
+            padding: 0 48px;
+            display: grid; grid-template-columns: 7fr 5fr; gap: 48px;
+            align-items: center;
+            flex: 1;
+            padding-top: 72px;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--crimson); margin-bottom: 24px;
+        }
+        .hero-eyebrow::before {
+            content: ''; display: block;
+            width: 32px; height: 1px; background: var(--crimson);
+        }
+        .hero-h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800; font-size: clamp(56px, 7vw, 96px);
+            line-height: 0.95; text-transform: uppercase;
+            color: var(--text); margin-bottom: 24px;
+        }
+        .hero-h1 em { font-style: normal; color: var(--crimson); }
+        .hero-sub { font-size: 15px; font-weight: 300; color: var(--muted-light); line-height: 1.7; max-width: 480px; margin-bottom: 40px; }
+        .hero-actions { display: flex; gap: 16px; align-items: center; margin-bottom: 56px; }
+        .btn-primary {
+            font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: #fff; background: var(--crimson); padding: 14px 32px; text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-primary:hover { background: var(--crimson-dark); }
+        .btn-secondary {
+            font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--muted-light); border: 1px solid rgba(255,255,255,0.15);
+            padding: 14px 32px; text-decoration: none;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--text); color: var(--text); }
+        .hero-badges { display: flex; gap: 20px; flex-wrap: wrap; }
+        .hero-badge {
+            display: flex; flex-direction: column;
+            padding: 14px 20px;
+            border: 1px solid var(--border-red);
+            background: rgba(183,28,28,0.05);
+        }
+        .hero-badge-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 28px; color: var(--crimson); line-height: 1; }
+        .hero-badge-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+        /* hero right cards */
+        .hero-cards { display: flex; flex-direction: column; gap: 16px; }
+        .hero-card {
+            background: rgba(17,17,17,0.7);
+            border: 1px solid var(--border-red);
+            padding: 24px 28px;
+            backdrop-filter: blur(20px);
+        }
+        .hero-card-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--crimson); margin-bottom: 8px; }
+        .hero-card-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 42px; color: var(--text); line-height: 1; }
+        .hero-card-desc { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+        .hero-card-list { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+        .hero-card-list span {
+            font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--muted-light); display: flex; align-items: center; gap: 8px;
+        }
+        .hero-card-list span::before { content: '—'; color: var(--crimson); }
+
+        /* hero bottom bar */
+        .hero-bottom {
+            position: relative; z-index: 2;
+            border-top: 1px solid var(--border);
+            background: rgba(10,10,10,0.85);
+        }
+        .hero-bottom-inner {
+            max-width: 1440px; margin: 0 auto; padding: 0 48px;
+            display: flex; gap: 0;
+        }
+        .hero-stat {
+            padding: 20px 36px; border-right: 1px solid var(--border);
+            display: flex; align-items: center; gap: 16px;
+        }
+        .hero-stat:first-child { padding-left: 0; }
+        .hero-stat-icon { color: var(--crimson); flex-shrink: 0; }
+        .hero-stat-text {}
+        .hero-stat-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+        .hero-stat-val { font-size: 14px; font-weight: 600; color: var(--text); margin-top: 2px; }
+
+        /* ====== SECTIONS COMMON ====== */
+        .section-label {
+            font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--crimson); display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+        }
+        .section-label::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--crimson); }
+        .section-h2 {
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+            font-size: clamp(36px, 4.5vw, 60px); line-height: 1; text-transform: uppercase;
+            color: var(--text);
+        }
+
+        /* ====== ABOUT ====== */
+        #about { padding: 120px 0; }
+        .about-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: start; }
+        .about-img-wrap { position: relative; }
+        .about-img-wrap::before {
+            content: ''; position: absolute;
+            inset: -12px 0 0 -12px; border: 1px solid var(--crimson-dark); z-index: 0;
+        }
+        .about-img-wrap img { position: relative; z-index: 1; width: 100%; height: 520px; object-fit: cover; filter: grayscale(0.3) contrast(1.1); }
+        .about-img-badge {
+            position: absolute; bottom: -1px; right: -1px; z-index: 2;
+            background: var(--crimson); padding: 16px 24px;
+        }
+        .about-img-badge span { display: block; }
+        .about-img-badge .badge-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 36px; line-height: 1; color: #fff; }
+        .about-img-badge .badge-txt { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 2px; }
+        .about-right { padding-top: 12px; }
+        .about-body { font-size: 15px; font-weight: 300; color: var(--muted-light); line-height: 1.8; margin-bottom: 40px; }
+        .about-quote {
+            border-left: 3px solid var(--crimson); padding-left: 24px; margin-bottom: 40px;
+            font-size: 18px; font-weight: 400; color: var(--text); font-style: italic; line-height: 1.6;
+        }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .about-feat {
+            background: var(--surface); border: 1px solid var(--border);
+            padding: 24px; position: relative; overflow: hidden;
+        }
+        .about-feat::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--crimson); }
+        .about-feat-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .about-feat-desc { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.5; }
+
+        /* ====== SERVICES ====== */
+        #services { padding: 120px 0; background: var(--surface); }
+        .services-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+        .services-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 60px; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+        .service-card {
+            position: relative; overflow: hidden; aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+        .service-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(0.6) brightness(0.7);
+            transition: filter 0.5s, transform 0.5s;
+        }
+        .service-card:hover img { filter: grayscale(0) brightness(0.75); transform: scale(1.04); }
+        .service-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.2) 60%, transparent 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 28px;
+        }
+        .service-card:hover .service-overlay { background: linear-gradient(to top, rgba(127,29,29,0.85) 0%, rgba(10,10,10,0.3) 60%, transparent 100%); }
+        .service-num { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; color: var(--crimson); margin-bottom: 8px; }
+        .service-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; color: var(--text); line-height: 1.1; margin-bottom: 8px; }
+        .service-desc { font-size: 11px; font-weight: 300; color: rgba(240,240,240,0.7); line-height: 1.5; }
+        .service-arrow {
+            position: absolute; top: 20px; right: 20px;
+            width: 36px; height: 36px; background: var(--crimson);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: translateY(-4px); transition: opacity 0.3s, transform 0.3s;
+        }
+        .service-card:hover .service-arrow { opacity: 1; transform: translateY(0); }
+
+        /* ====== PROJECTS ====== */
+        #projects { padding: 120px 0; }
+        .projects-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+        .projects-list { margin-top: 60px; display: flex; flex-direction: column; gap: 2px; }
+        .project-item {
+            display: grid; grid-template-columns: 1fr 2fr 1fr;
+            align-items: center;
+            padding: 28px 0; border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+            cursor: default;
+        }
+        .project-item:hover { background: rgba(183,28,28,0.04); padding-left: 12px; padding-right: 12px; margin: 0 -12px; }
+        .project-year { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 40px; color: var(--crimson); line-height: 1; }
+        .project-info {}
+        .project-route { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+        .project-name { font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.3; }
+        .project-meta { text-align: right; }
+        .project-type { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--crimson); }
+        .project-duration { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 4px; }
+
+        /* ====== WHY ====== */
+        #why { padding: 120px 0; background: var(--surface); }
+        .why-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+        .why-block { padding: 48px 40px; border: 1px solid var(--border); background: var(--near-black); }
+        .why-num {
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+            font-size: 72px; line-height: 1; color: rgba(183,28,28,0.12);
+            margin-bottom: 24px;
+        }
+        .why-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+        .why-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; }
+        .why-icon { color: var(--crimson); margin-bottom: 20px; }
+
+        /* ====== COMPANY STRUCTURE ====== */
+        #team { padding: 120px 0; }
+        .team-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+        .team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 60px; }
+        .team-card { background: var(--surface); border: 1px solid var(--border); padding: 28px 20px; text-align: center; }
+        .team-role { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--crimson); margin-bottom: 12px; }
+        .team-name { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+
+        /* ====== CTA ====== */
+        #cta {
+            position: relative; padding: 140px 0; overflow: hidden;
+        }
+        #cta .cta-bg {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(10,10,10,0.93) 40%, rgba(127,29,29,0.6) 100%),
+                url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1920');
+            background-size: cover; background-position: center;
+        }
+        .cta-inner { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+        .cta-sup { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--crimson); margin-bottom: 20px; }
+        .cta-h2 {
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+            font-size: clamp(44px, 6vw, 80px); text-transform: uppercase;
+            color: var(--text); line-height: 0.95; max-width: 700px; margin-bottom: 40px;
+        }
+
+        /* ====== FOOTER ====== */
+        footer { background: var(--near-black); border-top: 1px solid var(--border); padding: 80px 0 40px; }
+        .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 2fr 1fr 1fr 2fr; gap: 60px; }
+        .footer-brand-mark { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .footer-logo-sq { width: 32px; height: 32px; background: var(--crimson); display: flex; align-items: center; justify-content: center; }
+        .footer-wordmark { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.12em; color: var(--text); }
+        .footer-tagline { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+        .footer-contact-line { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+        .footer-contact-line svg { flex-shrink: 0; margin-top: 2px; }
+        .footer-contact-line span { font-size: 13px; font-weight: 300; color: var(--muted-light); line-height: 1.5; }
+        .footer-col-title { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .footer-link { display: block; font-size: 13px; font-weight: 300; color: var(--muted); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+        .footer-link:hover { color: var(--text); }
+        .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 24px 48px 0; border-top: 1px solid var(--border); margin-top: 60px; display: flex; justify-content: space-between; align-items: center; }
+        .footer-copy { font-size: 12px; color: var(--muted); }
+        .footer-reg { font-size: 11px; color: rgba(136,136,136,0.5); }
+
+        /* ====== MOBILE ====== */
+        @media (max-width: 900px) {
+            .nav-inner { padding: 0 24px; }
+            .nav-links { display: none; }
+            .hero-content { grid-template-columns: 1fr; padding: 0 24px; gap: 32px; }
+            .hero-cards { display: none; }
+            .hero-h1 { font-size: 52px; }
+            .about-inner { grid-template-columns: 1fr; padding: 0 24px; gap: 48px; }
+            .services-inner, .projects-inner, .why-inner, .team-inner, .cta-inner, .footer-inner, .footer-bottom { padding: 0 24px; }
+            .services-head { flex-direction: column; gap: 24px; align-items: flex-start; }
+            .services-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+            .project-item { grid-template-columns: auto 1fr; gap: 20px; }
+            .project-meta { display: none; }
+            .hero-bottom-inner { overflow-x: auto; padding: 0 24px; }
+            .hero-stat:first-child { padding-left: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="nav-inner">
+        <a href="#hero" class="nav-logo">
+            <div class="nav-logo-mark">
+                <svg viewBox="0 0 20 20" fill="white"><polygon points="10,2 18,18 2,18"/></svg>
+            </div>
+            <span class="nav-wordmark">CHALINA</span>
+        </a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Projects</a>
+            <a href="#why">Why Us</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="#contact" class="nav-cta">Get in Touch</a>
+    </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section id="hero">
+    <div class="hero-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="hero-content">
+        <div>
+            <div class="hero-eyebrow">Trusted Infrastructure Maintenance Company</div>
+            <h1 class="hero-h1">Partner in<br><em>Excellence.</em></h1>
+            <p class="hero-sub">Construction, toll road maintenance, infrastructure maintenance, cleaning services, and professional workforce solutions across Indonesia.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn-primary">Get Consultation</a>
+                <a href="#services" class="btn-secondary">Our Services</a>
+            </div>
+            <div class="hero-badges">
+                <div class="hero-badge">
+                    <span class="hero-badge-num">2021</span>
+                    <span class="hero-badge-label">Established</span>
+                </div>
+                <div class="hero-badge">
+                    <span class="hero-badge-num">9+</span>
+                    <span class="hero-badge-label">Core Services</span>
+                </div>
+                <div class="hero-badge">
+                    <span class="hero-badge-num">4</span>
+                    <span class="hero-badge-label">Major Projects</span>
+                </div>
+                <div class="hero-badge">
+                    <span class="hero-badge-num">3</span>
+                    <span class="hero-badge-label">Office Locations</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-cards">
+            <div class="hero-card">
+                <div class="hero-card-tag">Company Scale</div>
+                <div class="hero-card-val">National</div>
+                <div class="hero-card-desc">Operating across Sulawesi, Java & surrounding corridors</div>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-tag">Service Excellence</div>
+                <div class="hero-card-list">
+                    <span>Toll Road Maintenance</span>
+                    <span>Infrastructure Works</span>
+                    <span>Workforce Supply</span>
+                    <span>Road Cleaning Services</span>
+                </div>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-tag">Current Deployment</div>
+                <div class="hero-card-val">2025–28</div>
+                <div class="hero-card-desc">Personnel Deployment — Cibitung–Cilincing Toll Road</div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-bottom">
+        <div class="hero-bottom-inner">
+            <div class="hero-stat">
+                <svg class="hero-stat-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <div class="hero-stat-text">
+                    <div class="hero-stat-label">Head Office</div>
+                    <div class="hero-stat-val">Bekasi, Jawa Barat</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <svg class="hero-stat-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                <div class="hero-stat-text">
+                    <div class="hero-stat-label">Branch Offices</div>
+                    <div class="hero-stat-val">Manado · Karanganyar</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <svg class="hero-stat-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                <div class="hero-stat-text">
+                    <div class="hero-stat-label">Phone</div>
+                    <div class="hero-stat-val">0823 2081 3439</div>
+                </div>
+            </div>
+            <div class="hero-stat" style="border-right:none;">
+                <svg class="hero-stat-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <div class="hero-stat-text">
+                    <div class="hero-stat-label">Email</div>
+                    <div class="hero-stat-val">chalinalintangabadi@gmail.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<section id="about">
+    <div class="about-inner">
+        <div class="about-img-wrap">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800" alt="Infrastructure Work">
+            <div class="about-img-badge">
+                <span class="badge-num">2021</span>
+                <span class="badge-txt">Est. Jakarta</span>
+            </div>
+        </div>
+        <div class="about-right">
+            <div class="section-label">Corporate Profile</div>
+            <h2 class="section-h2" style="margin-bottom:32px;">Who<br>We Are.</h2>
+            <blockquote class="about-quote">"Partner In Excellence" — delivering superior infrastructure services across Indonesia's national toll network.</blockquote>
+            <p class="about-body">Didirikan pada tahun 2021, PT Cahaya Lintang Abadi bergerak di bidang konstruksi dan penyediaan tenaga kerja dengan komitmen kuat memberikan layanan yang unggul. Kami bervisi menjadi perusahaan yang sepenuhnya customer-centric, menyeimbangkan kualitas output produksi hingga efektivitas pengelolaan anggaran.</p>
+            <div class="about-grid">
+                <div class="about-feat">
+                    <div class="about-feat-title">Operational Excellence</div>
+                    <div class="about-feat-desc">Consistent quality framework across every project scope.</div>
+                </div>
+                <div class="about-feat">
+                    <div class="about-feat-title">Professional Team</div>
+                    <div class="about-feat-desc">Certified workforce from Direktur to Area Coordinator.</div>
+                </div>
+                <div class="about-feat">
+                    <div class="about-feat-title">Customer-Centric</div>
+                    <div class="about-feat-desc">Every decision driven by client outcomes and satisfaction.</div>
+                </div>
+                <div class="about-feat">
+                    <div class="about-feat-title">Reliable Execution</div>
+                    <div class="about-feat-desc">On-budget, on-schedule delivery for every engagement.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== SERVICES ====== -->
+<section id="services">
+    <div class="services-inner">
+        <div class="services-head">
+            <div>
+                <div class="section-label">Product &amp; Services</div>
+                <h2 class="section-h2">What<br>We Do.</h2>
+            </div>
+            <p style="font-size:14px;font-weight:300;color:var(--muted);max-width:320px;line-height:1.7;">Comprehensive maintenance and construction services engineered for Indonesia's national toll infrastructure.</p>
+        </div>
+        <div class="services-grid">
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=600" alt="Toll Road">
+                <div class="service-overlay">
+                    <div class="service-num">01</div>
+                    <div class="service-title">Toll Road Maintenance</div>
+                    <div class="service-desc">Routine and periodic overlay works on active toll corridors.</div>
+                </div>
+                <div class="service-arrow">
+                    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600" alt="Expansion Joint">
+                <div class="service-overlay">
+                    <div class="service-num">02</div>
+                    <div class="service-title">Expansion Joint Works</div>
+                    <div class="service-desc">Specialized rehabilitation for elevated toll road structures.</div>
+                </div>
+                <div class="service-arrow">
+                    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?q=80&w=600" alt="Traffic Sign">
+                <div class="service-overlay">
+                    <div class="service-num">03</div>
+                    <div class="service-title">Traffic Sign Cleaning</div>
+                    <div class="service-desc">Periodic washing to maintain critical road sign visibility.</div>
+                </div>
+                <div class="service-arrow">
+                    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1605281317010-fe5ffe798156?q=80&w=600" alt="Road Cleaning">
+                <div class="service-overlay">
+                    <div class="service-num">04</div>
+                    <div class="service-title">Road Cleaning</div>
+                    <div class="service-desc">Weed control and comprehensive sweeping operations.</div>
+                </div>
+                <div class="service-arrow">
+                    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?q=80&w=600" alt="Garden">
+                <div class="service-overlay">
+                    <div class="service-num">05</div>
+                    <div class="service-title">Garden Maintenance</div>
+                    <div class="service-desc">Highway landscaping, turf care, and aesthetic greening.</div>
+                </div>
+                <div class="service-arrow">
+                    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1584467541268-b040f83be3fd?q=80&w=600" alt="Drainage">
+                <div class="service-overlay">
+                    <div class="service-num">06</div>
+                    <div class="service-title">Drainage Cleaning</div>
+                    <div class="service-desc">Structural clearing of drainage channels and culverts.</div>
+                </div>
+                <div class="service-arrow">
+                    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600" alt="Concrete Barrier">
+                <div class="service-overlay">
+                    <div class="service-num">07</div>
+                    <div class="service-title">Concrete Barrier Cleaning</div>
+                    <div class="service-desc">Barrier maintenance to preserve structural strength and safety.</div>
+                </div>
+                <div class="service-arrow">
+                    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600" alt="Gabion">
+                <div class="service-overlay">
+                    <div class="service-num">08</div>
+                    <div class="service-title">Gabion Construction</div>
+                    <div class="service-desc">Retaining structures to prevent soil erosion and land collapse.</div>
+                </div>
+                <div class="service-arrow">
+                    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=600" alt="Workforce">
+                <div class="service-overlay">
+                    <div class="service-num">09</div>
+                    <div class="service-title">Workforce Supply</div>
+                    <div class="service-desc">Competent, certified personnel for toll road operations nationwide.</div>
+                </div>
+                <div class="service-arrow">
+                    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ====== PROJECT EXPERIENCE ====== -->
+<section id="projects">
+    <div class="projects-inner">
+        <div class="section-label">Track Record</div>
+        <h2 class="section-h2">Project<br>Experience.</h2>
+        <div class="projects-list">
+            <div class="project-item">
+                <div class="project-year">2022</div>
+                <div class="project-info">
+                    <div class="project-route">Ruas Jalan Tol Manado – Bitung</div>
+                    <div class="project-name">Perawatan Lingkungan &amp; Sarana Perlengkapan Jalan Tol</div>
+                </div>
+                <div class="project-meta">
+                    <div class="project-type">Maintenance</div>
+                    <div class="project-duration">Jan 2022 – Des 2022</div>
+                </div>
+            </div>
+            <div class="project-item">
+                <div class="project-year">2023</div>
+                <div class="project-info">
+                    <div class="project-route">Ruas Jalan Tol Manado – Bitung</div>
+                    <div class="project-name">Perawatan Lingkungan &amp; Sarana Perlengkapan Jalan Tol</div>
+                </div>
+                <div class="project-meta">
+                    <div class="project-type">Maintenance</div>
+                    <div class="project-duration">Jan 2023 – Mar 2023</div>
+                </div>
+            </div>
+            <div class="project-item">
+                <div class="project-year">2024</div>
+                <div class="project-info">
+                    <div class="project-route">Ruas Jalan Tol Cibitung – Cilincing</div>
+                    <div class="project-name">Perawatan &amp; Kebersihan Jalan Tol</div>
+                </div>
+                <div class="project-meta">
+                    <div class="project-type">Cleaning &amp; Maintenance</div>
+                    <div class="project-duration">Sep 2024 – Sep 2025</div>
+                </div>
+            </div>
+            <div class="project-item" style="border-bottom:none;">
+                <div class="project-year" style="color:var(--text);">2025</div>
+                <div class="project-info">
+                    <div class="project-route">Ruas Jalan Tol Cibitung – Cilincing</div>
+                    <div class="project-name">Pengadaan Personil Aktivitas Jalan Tol <span style="color:var(--crimson);font-size:11px;font-weight:600;letter-spacing:0.1em;"> ● ONGOING</span></div>
+                </div>
+                <div class="project-meta">
+                    <div class="project-type">Workforce Supply</div>
+                    <div class="project-duration">Jun 2025 – Mei 2028</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== WHY US ====== -->
+<section id="why">
+    <div class="why-inner">
+        <div class="section-label">Why Choose Us</div>
+        <h2 class="section-h2">Built on<br>Excellence.</h2>
+        <div class="why-grid">
+            <div class="why-block">
+                <div class="why-num">01</div>
+                <svg class="why-icon" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <div class="why-title">Professional Team</div>
+                <div class="why-desc">Experienced structural engineers, field supervisors, and area coordinators managing every detail of your project.</div>
+            </div>
+            <div class="why-block">
+                <div class="why-num">02</div>
+                <svg class="why-icon" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <div class="why-title">Operational Excellence</div>
+                <div class="why-desc">Consistent systems and quality frameworks that deliver results on time and within scope.</div>
+            </div>
+            <div class="why-block">
+                <div class="why-num">03</div>
+                <svg class="why-icon" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M11.48 3.499c.151-.312.559-.312.71 0l2.316 4.793 5.234.746c.348.05.487.48.235.727l-3.791 3.633.914 5.202c.061.348-.306.61-.611.442L12 16.747l-4.666 2.413c-.305.168-.667-.094-.61-.442l.914-5.202-3.791-3.633c-.251-.247-.113-.678.235-.727l5.234-.746 2.316-4.793z"/></svg>
+                <div class="why-title">Customer Satisfaction</div>
+                <div class="why-desc">Every project aligns to client goals — quality, budget management, and service responsiveness.</div>
+            </div>
+            <div class="why-block">
+                <div class="why-num">04</div>
+                <svg class="why-icon" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <div class="why-title">Reliable Partner</div>
+                <div class="why-desc">A trusted long-term partner proven across multiple toll corridors and national infrastructure contracts.</div>
+            </div>
+            <div class="why-block">
+                <div class="why-num">05</div>
+                <svg class="why-icon" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <div class="why-title">Quality Assurance</div>
+                <div class="why-desc">Rigorous inspection protocols at every stage from mobilization to project hand-over.</div>
+            </div>
+            <div class="why-block">
+                <div class="why-num">06</div>
+                <svg class="why-icon" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="why-title">Efficient Budget Management</div>
+                <div class="why-desc">Optimized resource deployment to maximize value for every rupiah invested.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== TEAM ====== -->
+<section id="team">
+    <div class="team-inner">
+        <div class="section-label">Company Structure</div>
+        <h2 class="section-h2">Leadership<br>Team.</h2>
+        <div class="team-grid">
+            <div class="team-card" style="border-top:3px solid var(--crimson);">
+                <div class="team-role">Direktur</div>
+                <div class="team-name">B.S. Sukarno</div>
+            </div>
+            <div class="team-card">
+                <div class="team-role">Project Manager</div>
+                <div class="team-name">Y. A. S. Laksmono</div>
+            </div>
+            <div class="team-card">
+                <div class="team-role">Financial Manager</div>
+                <div class="team-name">Lintar Respati</div>
+            </div>
+            <div class="team-card">
+                <div class="team-role">Koordinator Area 1</div>
+                <div class="team-name">Putut Kumara E.</div>
+            </div>
+            <div class="team-card">
+                <div class="team-role">Koordinator Area 2</div>
+                <div class="team-name">H. M. Subchan, S.H.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== CTA ====== -->
+<section id="cta">
+    <div class="cta-bg"></div>
+    <div class="cta-inner">
+        <div class="cta-sup">Ready to Build?</div>
+        <h2 class="cta-h2">Let's Build Better Infrastructure Together.</h2>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+            <a href="mailto:chalinalintangabadi@gmail.com" class="btn-primary">Contact Us Now</a>
+            <a href="tel:082320813439" class="btn-secondary">0823 2081 3439</a>
+        </div>
+    </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer id="contact">
+    <div class="footer-inner">
+        <div>
+            <div class="footer-brand-mark">
+                <div class="footer-logo-sq">
+                    <svg viewBox="0 0 20 20" fill="white" width="18" height="18"><polygon points="10,2 18,18 2,18"/></svg>
+                </div>
+                <span class="footer-wordmark">CHALINA</span>
+            </div>
+            <div class="footer-tagline">PT Cahaya Lintang Abadi</div>
+            <div class="footer-contact-line">
+                <svg width="14" height="14" fill="none" stroke="#B71C1C" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                <span>Mensana Tower LT 6 Unit K, Jl. Raya Kranggan No. 69, Jatisampurna, Bekasi 17433</span>
+            </div>
+            <div class="footer-contact-line">
+                <svg width="14" height="14" fill="none" stroke="#B71C1C" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                <span>0823 2081 3439</span>
+            </div>
+            <div class="footer-contact-line">
+                <svg width="14" height="14" fill="none" stroke="#B71C1C" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <span>chalinalintangabadi@gmail.com</span>
+            </div>
+        </div>
+        <div>
+            <div class="footer-col-title">Navigation</div>
+            <a href="#about" class="footer-link">About Us</a>
+            <a href="#services" class="footer-link">Services</a>
+            <a href="#projects" class="footer-link">Projects</a>
+            <a href="#why" class="footer-link">Why Us</a>
+            <a href="#team" class="footer-link">Team</a>
+        </div>
+        <div>
+            <div class="footer-col-title">Offices</div>
+            <div style="margin-bottom:16px;">
+                <div style="font-size:11px;font-weight:600;color:var(--text);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Bekasi</div>
+                <div style="font-size:12px;font-weight:300;color:var(--muted);line-height:1.5;">Mensana Tower LT 6 Unit K</div>
+            </div>
+            <div style="margin-bottom:16px;">
+                <div style="font-size:11px;font-weight:600;color:var(--text);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Manado</div>
+                <div style="font-size:12px;font-weight:300;color:var(--muted);line-height:1.5;">Tamansari Metropolitan, New Bunaken G8/8A</div>
+            </div>
+            <div>
+                <div style="font-size:11px;font-weight:600;color:var(--text);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Karanganyar</div>
+                <div style="font-size:12px;font-weight:300;color:var(--muted);line-height:1.5;">Ruko Citra Buana Kodan, Colombadu</div>
+            </div>
+        </div>
+        <div>
+            <div class="footer-col-title">Company Information</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div>
+                    <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">NPWP</div>
+                    <div style="font-size:12px;font-weight:300;color:var(--muted-light);">043.569.592.9-447.000</div>
+                </div>
+                <div>
+                    <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">NIB</div>
+                    <div style="font-size:12px;font-weight:300;color:var(--muted-light);">2911210047285</div>
+                </div>
+            </div>
+            <div style="margin-top:24px;padding:24px;background:var(--surface-2);border:1px solid var(--border-red);">
+                <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--crimson);margin-bottom:8px;">Vision</div>
+                <div style="font-size:13px;font-weight:300;color:var(--muted-light);line-height:1.6;">Menjadi Kontraktor Pemeliharaan dan Perawatan Jalan Tol yang Profesional dan Inovatif.</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-copy">© 2025 PT Cahaya Lintang Abadi. All rights reserved.</div>
+        <div class="footer-reg">Partner In Excellence</div>
+    </div>
+</footer>
+
+</body>
+</html>
